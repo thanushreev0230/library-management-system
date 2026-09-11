@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>📚 Library Management</h2>
+    <div>
+        <a href="/add" class="btn">+ Add Book</a>
+        <a href="/logout" class="btn">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+
+<table>
+<tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for b in books %}
+<tr>
+    <td>{{ b.title }}</td>
+    <td>{{ b.author }}</td>
+    <td>{{ b.status }}</td>
+    <td>
+        {% if b.status == 'Available' %}
+            <a href="/issue/{{ b.id }}" class="edit">Issue</a>
+        {% else %}
+            <a href="/return/{{ b.id }}" class="return">Return</a>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
